@@ -1,3 +1,3 @@
-# stackblitz-test
+# nodejs-testapp
 
-[Edit in StackBlitz next generation editor ⚡️](https://stackblitz.com/~/github.com/slavkolunar/stackblitz-test)
+Setting up a proper achitecture
