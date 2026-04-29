@@ -1,23 +1,19 @@
 require('dotenv').config();
 
-const { createClient } = require('@supabase/supabase-js');
+const express = require('express');
+const itemRoutes = require('./src/routes/itemRoutes');
 
-const supabase = createClient(
-  process.env.SUPABASE_URL,
-  process.env.SUPABASE_KEY
-);
+const app = express();
+app.use(express.json());
 
-async function testConnection() {
-  const { data, error } = await supabase
-    .from('test_table')
-    .select('*')
-    .limit(1);
+app.get('/health', (req, res) => {
+  res.json({ status: 'ok' });
+});
 
-  if (error) {
-    console.error('Error:', error.message);
-  } else {
-    console.log('Success:', data);
-  }
-}
+app.use('/', itemRoutes);
 
-testConnection();
+const PORT = 3000;
+
+app.listen(PORT, '0.0.0.0', () => {
+  console.log(`API running on port ${PORT}`);
+});
